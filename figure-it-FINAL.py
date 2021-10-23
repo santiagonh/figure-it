@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[108]:
 
 
 import PIL as pl
@@ -13,7 +13,7 @@ import random
 import math
 
 
-# In[2]:
+# In[109]:
 
 
 #función que crea las áreas de las figuras, devuelve un diccionario.
@@ -31,14 +31,14 @@ def areas():
     
 
 
-# In[3]:
+# In[110]:
 
 
 diccionario_areas=areas()
 diccionario_areas
 
 
-# In[4]:
+# In[111]:
 
 
 #función que obtiene los lados del rectángulo a partir del area obtenida en def areas()
@@ -49,19 +49,19 @@ def lados_rect(area):
     return dic_principal
 
 
-# In[5]:
+# In[112]:
 
 
 dic_principal=lados_rect(diccionario_areas["principal"])
 
 
-# In[17]:
+# In[113]:
 
 
 dic_principal
 
 
-# In[7]:
+# In[114]:
 
 
 #función para crear diámetros a partir de las áreas de def areas(), devuelve otro diccionario
@@ -73,19 +73,19 @@ def diametros(area_a,area_b,area_c):
     return dic_diametro
 
 
-# In[8]:
+# In[115]:
 
 
 diametros=diametros(diccionario_areas['figura_a'], diccionario_areas['figura_b'], diccionario_areas['figura_c'])
 
 
-# In[9]:
+# In[116]:
 
 
 diametros
 
 
-# In[23]:
+# In[117]:
 
 
 #función que hace el dibujo para adivinar las figuras a partir de diámetros (obtenidos de def diametros) 
@@ -113,7 +113,7 @@ def rect (a, b, c, d, e):
     return im
 
 
-# In[11]:
+# In[118]:
 
 
 # función que calcula qué figura es la ganadora
@@ -125,45 +125,49 @@ def figura_ganadora(principal, figura_a, figura_b, figura_c):
     
 
 
-# In[12]:
+# In[119]:
 
 
 diferencia=figura_ganadora(diccionario_areas["principal"], diccionario_areas["figura_a"], diccionario_areas["figura_b"], diccionario_areas["figura_c"])
 
 
-# In[13]:
+# In[120]:
 
 
 diccionario_areas
 
 
-# In[24]:
+# In[121]:
 
 
 im=rect(diametros["diametro_a"], diametros["diametro_b"], diametros["diametro_c"],dic_principal["base"], dic_principal["altura"] )
 
 
-# In[15]:
+# In[122]:
 
 
 
 #función que obtiene input de usuario y comunica ganador"
 def ganador():
-
     input_usuario=input("Elige cuál de las figuras azules tienen el área más parecida a la figura roja")
+    while input_usuario not in ["a", "b", "c"]:
+        print("Input inválido, intenta de nuevo eligiendo las opciones 'a', 'b' o 'c'")
+        input_usuario=input("Elige cuál de las figuras azules tienen el área más parecida a la figura roja")
+        
     if input_usuario == min(diferencia,key=diferencia.get):
         return print(f"\nFelicidades!\nGanaste el juego: La figura {min(diferencia,key=diferencia.get)} tiene el área más parecida a la figura roja!",f'\n\nÁreas:\nFigura Principal: {diccionario_areas["principal"]}\nFigura a: {diccionario_areas["figura_a"]}\nFigura b: {diccionario_areas["figura_b"]}\nFigura c: {diccionario_areas["figura_c"]}')
     else: 
-        return print(f"\nPerdiste!\nLa figura {min(diferencia,key=diferencia.get)} tiene el área más parecida a la figura roja. Buena suerte en la próxima vez.", f'\n\nÁreas:\nFigura Principal: {diccionario_areas["principal"]}\nFigura a: {diccionario_areas["figura_a"]}\nFigura b: {diccionario_areas["figura_b"]}\nFigura c: {diccionario_areas["figura_c"]}')    
+        return print(f"\nPerdiste!\nLa figura {min(diferencia,key=diferencia.get)} tiene el área más parecida a la figura roja. Buena suerte en la próxima vez.", f'\n\nÁreas:\nFigura Principal: {diccionario_areas["principal"]}\nFigura a: {diccionario_areas["figura_a"]}\nFigura b: {diccionario_areas["figura_b"]}\nFigura c: {diccionario_areas["figura_c"]}')
+    
 
 
-# In[25]:
+# In[123]:
 
 
 im.show()
 
 
-# In[16]:
+# In[124]:
 
 
 ganador()
